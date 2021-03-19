@@ -4,7 +4,6 @@ import 'package:skeleton/service/dialog_service.dart';
 import 'package:skeleton/service/local_storage_service.dart';
 import 'package:skeleton/service/navigation_service.dart';
 import 'package:skeleton/service/permission_service.dart';
-import 'package:skeleton/service/push_notification_service.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -25,8 +24,5 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => PermissionService(),
-  );
-  locator.registerLazySingleton(
-    () => PushNotificationService(),
   );
 }

@@ -47,12 +47,6 @@ dependencies:
   # Permission
   permission_handler: ^6.1.1
 
-  # Firebase push notification
-  firebase_messaging: ^9.0.0
-
-  # Firebase core used for background notification
-  firebase_core: ^1.0.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
