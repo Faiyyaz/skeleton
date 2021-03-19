@@ -1,7 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
+import 'package:skeleton/screens/splash_screen.dart';
 import 'package:skeleton/service/navigation_service.dart';
 import 'package:skeleton/service/service_locator.dart' as serviceLocator;
+
+/// This method is used to listen notification in background. Here you cannot update any ui since it is outside application context
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  /// Initialization is required only if listening to notification in background
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
 
 void main() {
   /// Here we are ensuring that app is initialized
@@ -9,6 +19,9 @@ void main() {
 
   /// Here we are setting up our services on app startup
   serviceLocator.setupLocator();
+
+  /// Here we are setting firebase notification background listener
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(MyApp());
 }
@@ -27,7 +40,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ExampleScreen(),
+      home: SplashScreen(),
+      onGenerateRoute: _getRoute,
+    );
+  }
+
+  /// This method is used for named navigation
+  Route _getRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/example':
+        return _buildRoute(
+          settings,
+          ExampleScreen(),
+        );
+        break;
+    }
+    return null;
+  }
+
+  /// This function is where the navigation happens
+  MaterialPageRoute _buildRoute(RouteSettings settings, Widget widget) {
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (ctx) => widget,
     );
   }
 }
