@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skeleton/service/api_service.dart';
 import 'package:skeleton/service/dialog_service.dart';
 import 'package:skeleton/service/local_storage_service.dart';
+import 'package:skeleton/service/locale_service.dart';
 import 'package:skeleton/service/navigation_service.dart';
 import 'package:skeleton/service/service_locator.dart' as serviceLocator;
 
@@ -22,6 +23,7 @@ mixin BasicPage<Page extends BaseStatefulWidget> on BaseState<Page> {
       serviceLocator.locator<NavigationService>();
   final LocalStorageService localStorageService =
       serviceLocator.locator<LocalStorageService>();
+  final LocaleService localeService = serviceLocator.locator<LocaleService>();
 
   @override
   Widget build(BuildContext context) {
