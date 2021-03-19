@@ -19,6 +19,8 @@ Future<void> main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('hi')],
+
+      /// In this path we need to create json files for all locale we are defining
       path: 'assets/translations',
       fallbackLocale: Locale('en'),
       useOnlyLangCode: true,
