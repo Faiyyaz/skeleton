@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeleton/components/alignment/view_alignment.dart';
 
 /// This is custom button widget class which can be use to create reusable outline buttons
 
@@ -27,6 +28,9 @@ class CustomOutlineButton extends StatelessWidget {
   /// Corner Radius for button if any
   final double cornerRadius;
 
+  /// Alignment of the view
+  final ViewAlignment viewAlignment;
+
   CustomOutlineButton({
     @required this.onButtonPress,
     @required this.title,
@@ -36,6 +40,7 @@ class CustomOutlineButton extends StatelessWidget {
     this.titleTextStyle,
     this.buttonPadding,
     this.cornerRadius = 0.0,
+    this.viewAlignment = ViewAlignment.CENTER,
   });
 
   @override
@@ -44,21 +49,26 @@ class CustomOutlineButton extends StatelessWidget {
       data: ThemeData(
         buttonTheme: _getButtonTheme(context),
       ),
-      child: Center(
-        child: OutlinedButton(
-          onPressed: onButtonPress,
-          child: Text(
-            title,
-          ),
-          style: OutlinedButton.styleFrom(
-            textStyle: _getTextStyle(context),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(cornerRadius),
+      child: Wrap(
+        children: [
+          Align(
+            alignment: _getAlignment(),
+            child: OutlinedButton(
+              onPressed: onButtonPress,
+              child: Text(
+                title,
+              ),
+              style: OutlinedButton.styleFrom(
+                textStyle: _getTextStyle(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(cornerRadius),
+                ),
+                primary: outlineColor,
+                padding: _getPadding(),
+              ),
             ),
-            primary: outlineColor,
-            padding: _getPadding(),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -93,6 +103,22 @@ class CustomOutlineButton extends StatelessWidget {
       return EdgeInsets.symmetric(horizontal: 16.0);
     } else {
       return buttonPadding;
+    }
+  }
+
+  Alignment _getAlignment() {
+    switch (viewAlignment) {
+      case ViewAlignment.LEFT:
+        return Alignment.bottomLeft;
+        break;
+      case ViewAlignment.CENTER:
+        return Alignment.bottomCenter;
+        break;
+      case ViewAlignment.RIGHT:
+        return Alignment.bottomRight;
+        break;
+      default:
+        return Alignment.bottomCenter;
     }
   }
 }
