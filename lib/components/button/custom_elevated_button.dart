@@ -44,21 +44,26 @@ class CustomElevatedButton extends StatelessWidget {
       data: ThemeData(
         buttonTheme: _getButtonTheme(context),
       ),
-      child: Center(
-        child: ElevatedButton(
-          onPressed: onButtonPress,
-          child: Text(
-            title,
-          ),
-          style: ElevatedButton.styleFrom(
-            textStyle: _getTextStyle(context),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(cornerRadius),
+      child: Wrap(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ElevatedButton(
+              onPressed: onButtonPress,
+              child: Text(
+                title,
+              ),
+              style: ElevatedButton.styleFrom(
+                textStyle: _getTextStyle(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(cornerRadius),
+                ),
+                primary: backgroundColor,
+                padding: _getPadding(),
+              ),
             ),
-            primary: backgroundColor,
-            padding: _getPadding(),
           ),
-        ),
+        ],
       ),
     );
   }

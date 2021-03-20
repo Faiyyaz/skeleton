@@ -36,17 +36,22 @@ class CustomTextButton extends StatelessWidget {
       data: ThemeData(
         buttonTheme: _getButtonTheme(context),
       ),
-      child: Center(
-        child: TextButton(
-          onPressed: onButtonPress,
-          child: Text(
-            title,
+      child: Wrap(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TextButton(
+              onPressed: onButtonPress,
+              child: Text(
+                title,
+              ),
+              style: TextButton.styleFrom(
+                textStyle: _getTextStyle(context),
+                padding: _getPadding(),
+              ),
+            ),
           ),
-          style: TextButton.styleFrom(
-            textStyle: _getTextStyle(context),
-            padding: _getPadding(),
-          ),
-        ),
+        ],
       ),
     );
   }

@@ -44,21 +44,26 @@ class CustomOutlineButton extends StatelessWidget {
       data: ThemeData(
         buttonTheme: _getButtonTheme(context),
       ),
-      child: Center(
-        child: OutlinedButton(
-          onPressed: onButtonPress,
-          child: Text(
-            title,
-          ),
-          style: OutlinedButton.styleFrom(
-            textStyle: _getTextStyle(context),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(cornerRadius),
+      child: Wrap(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: OutlinedButton(
+              onPressed: onButtonPress,
+              child: Text(
+                title,
+              ),
+              style: OutlinedButton.styleFrom(
+                textStyle: _getTextStyle(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(cornerRadius),
+                ),
+                primary: outlineColor,
+                padding: _getPadding(),
+              ),
             ),
-            primary: outlineColor,
-            padding: _getPadding(),
           ),
-        ),
+        ],
       ),
     );
   }
