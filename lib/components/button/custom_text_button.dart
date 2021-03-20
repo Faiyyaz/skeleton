@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeleton/components/alignment/view_alignment.dart';
 
 /// This is custom button widget class which can be use to create reusable text buttons
 
@@ -21,6 +22,9 @@ class CustomTextButton extends StatelessWidget {
   /// Padding for button if any
   final EdgeInsets buttonPadding;
 
+  /// Alignment of the view
+  final ViewAlignment viewAlignment;
+
   CustomTextButton({
     @required this.onButtonPress,
     @required this.title,
@@ -28,6 +32,7 @@ class CustomTextButton extends StatelessWidget {
     this.minWidth,
     this.buttonPadding,
     this.titleTextStyle,
+    this.viewAlignment = ViewAlignment.CENTER,
   });
 
   @override
@@ -39,7 +44,7 @@ class CustomTextButton extends StatelessWidget {
       child: Wrap(
         children: [
           Align(
-            alignment: Alignment.bottomCenter,
+            alignment: _getAlignment(),
             child: TextButton(
               onPressed: onButtonPress,
               child: Text(
@@ -86,6 +91,22 @@ class CustomTextButton extends StatelessWidget {
       return EdgeInsets.symmetric(horizontal: 16.0);
     } else {
       return buttonPadding;
+    }
+  }
+
+  Alignment _getAlignment() {
+    switch (viewAlignment) {
+      case ViewAlignment.LEFT:
+        return Alignment.bottomLeft;
+        break;
+      case ViewAlignment.CENTER:
+        return Alignment.bottomCenter;
+        break;
+      case ViewAlignment.RIGHT:
+        return Alignment.bottomRight;
+        break;
+      default:
+        return Alignment.bottomCenter;
     }
   }
 }
