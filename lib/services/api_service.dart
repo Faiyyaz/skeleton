@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:skeleton/service/dialog_service.dart';
-import 'package:skeleton/service/local_storage_service.dart';
-import 'package:skeleton/service/service_locator.dart' as serviceLocator;
+import 'package:skeleton/services/dialog_service.dart';
+import 'package:skeleton/services/local_storage_service.dart';
+import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 import 'package:skeleton/utilities/constants.dart';
 import 'package:skeleton/utilities/string_utilities.dart';
 

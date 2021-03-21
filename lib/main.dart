@@ -3,8 +3,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
-import 'package:skeleton/service/navigation_service.dart';
-import 'package:skeleton/service/service_locator.dart' as serviceLocator;
+import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// This method is used to listen notification in background. Here you cannot update any ui since it is outside application context
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
