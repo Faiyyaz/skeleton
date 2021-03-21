@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:skeleton/components/alignment/view_alignment.dart';
+import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-/// This is custom button widget class which can be use to create reusable elevated buttons
+/// This is custom button widget class which can be use to create reusable translated outline buttons
 
-class CustomElevatedButton extends StatelessWidget {
+class CustomTranslationOutlineButton extends StatelessWidget {
   /// OnClick event of button
   final Function onButtonPress;
 
   /// Title of button
   final String title;
-
-  /// Background color of button
-  final Color backgroundColor;
 
   /// Custom TextStyle of button title if any
   final TextStyle titleTextStyle;
@@ -31,7 +29,10 @@ class CustomElevatedButton extends StatelessWidget {
   /// Alignment of the view
   final ViewAlignment viewAlignment;
 
-  CustomElevatedButton({
+  /// Background color of button
+  final Color backgroundColor;
+
+  CustomTranslationOutlineButton({
     @required this.onButtonPress,
     @required this.title,
     @required this.backgroundColor,
@@ -45,36 +46,32 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        buttonTheme: _getButtonTheme(context),
-      ),
-      child: Wrap(
-        children: [
-          Align(
-            alignment: _getAlignment(),
-            child: ElevatedButton(
-              onPressed: onButtonPress,
-              child: Text(
-                title,
+    return Wrap(
+      children: [
+        Align(
+          alignment: _getAlignment(),
+          child: OutlinedButton(
+            onPressed: onButtonPress,
+            child: Text(
+              title,
+            ).tr(),
+            style: OutlinedButton.styleFrom(
+              minimumSize: _getMinimumSize(context),
+              textStyle: _getTextStyle(context),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(cornerRadius),
               ),
-              style: ElevatedButton.styleFrom(
-                textStyle: _getTextStyle(context),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(cornerRadius),
-                ),
-                primary: backgroundColor,
-                padding: _getPadding(),
-              ),
+              primary: backgroundColor,
+              padding: _getPadding(),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  /// This method will update the buttonTheme with custom height and width
-  ButtonThemeData _getButtonTheme(BuildContext context) {
+  /// This method will return size of button
+  Size _getMinimumSize(BuildContext context) {
     ButtonThemeData buttonThemeData = Theme.of(context).buttonTheme;
 
     if (height != null) {
@@ -85,7 +82,10 @@ class CustomElevatedButton extends StatelessWidget {
       buttonThemeData = buttonThemeData.copyWith(minWidth: minWidth);
     }
 
-    return buttonThemeData;
+    return Size(
+      buttonThemeData.minWidth,
+      buttonThemeData.height,
+    );
   }
 
   /// This method will decide textTheme to be used

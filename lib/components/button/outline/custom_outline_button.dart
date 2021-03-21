@@ -10,9 +10,6 @@ class CustomOutlineButton extends StatelessWidget {
   /// Title of button
   final String title;
 
-  /// Background color of button
-  final Color outlineColor;
-
   /// Custom TextStyle of button title if any
   final TextStyle titleTextStyle;
 
@@ -31,10 +28,13 @@ class CustomOutlineButton extends StatelessWidget {
   /// Alignment of the view
   final ViewAlignment viewAlignment;
 
+  /// Background color of button
+  final Color backgroundColor;
+
   CustomOutlineButton({
     @required this.onButtonPress,
     @required this.title,
-    @required this.outlineColor,
+    @required this.backgroundColor,
     this.height,
     this.minWidth,
     this.titleTextStyle,
@@ -45,36 +45,32 @@ class CustomOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        buttonTheme: _getButtonTheme(context),
-      ),
-      child: Wrap(
-        children: [
-          Align(
-            alignment: _getAlignment(),
-            child: OutlinedButton(
-              onPressed: onButtonPress,
-              child: Text(
-                title,
+    return Wrap(
+      children: [
+        Align(
+          alignment: _getAlignment(),
+          child: OutlinedButton(
+            onPressed: onButtonPress,
+            child: Text(
+              title,
+            ),
+            style: OutlinedButton.styleFrom(
+              minimumSize: _getMinimumSize(context),
+              textStyle: _getTextStyle(context),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(cornerRadius),
               ),
-              style: OutlinedButton.styleFrom(
-                textStyle: _getTextStyle(context),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(cornerRadius),
-                ),
-                primary: outlineColor,
-                padding: _getPadding(),
-              ),
+              primary: backgroundColor,
+              padding: _getPadding(),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  /// This method will update the buttonTheme with custom height and width
-  ButtonThemeData _getButtonTheme(BuildContext context) {
+  /// This method will return size of button
+  Size _getMinimumSize(BuildContext context) {
     ButtonThemeData buttonThemeData = Theme.of(context).buttonTheme;
 
     if (height != null) {
@@ -85,7 +81,10 @@ class CustomOutlineButton extends StatelessWidget {
       buttonThemeData = buttonThemeData.copyWith(minWidth: minWidth);
     }
 
-    return buttonThemeData;
+    return Size(
+      buttonThemeData.minWidth,
+      buttonThemeData.height,
+    );
   }
 
   /// This method will decide textTheme to be used

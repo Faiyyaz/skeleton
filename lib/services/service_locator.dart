@@ -1,10 +1,9 @@
 import 'package:get_it/get_it.dart';
-import 'package:skeleton/service/api_service.dart';
-import 'package:skeleton/service/dialog_service.dart';
-import 'package:skeleton/service/local_storage_service.dart';
-import 'package:skeleton/service/locale_service.dart';
-import 'package:skeleton/service/navigation_service.dart';
-import 'package:skeleton/service/permission_service.dart';
+import 'package:skeleton/services/api_service.dart';
+import 'package:skeleton/services/dialog_service.dart';
+import 'package:skeleton/services/local_storage_service.dart';
+import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/permission_service.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -25,8 +24,5 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => PermissionService(),
-  );
-  locator.registerLazySingleton(
-    () => LocaleService(),
   );
 }
