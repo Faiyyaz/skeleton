@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:skeleton/service/api_service.dart';
-import 'package:skeleton/service/dialog_service.dart';
-import 'package:skeleton/service/local_storage_service.dart';
-import 'package:skeleton/service/navigation_service.dart';
-import 'package:skeleton/service/service_locator.dart' as serviceLocator;
+import 'package:skeleton/services/api_service.dart';
+import 'package:skeleton/services/dialog_service.dart';
+import 'package:skeleton/services/local_storage_service.dart';
+import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// This is custom stateful widget class which will be extended by all stateful widget
 abstract class BaseStatefulWidget extends StatefulWidget {

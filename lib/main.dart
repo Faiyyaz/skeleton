@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
-import 'package:skeleton/service/navigation_service.dart';
-import 'package:skeleton/service/service_locator.dart' as serviceLocator;
+import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 void main() {
   /// Here we are ensuring that app is initialized

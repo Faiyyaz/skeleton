@@ -5,13 +5,13 @@ import 'package:permission_handler/permission_handler.dart';
 
 class PermissionService {
   Future<void> getPermission({
-    @required Permission permission,
+    @required AppPermission appPermission,
     Function onDecline,
     Function onDenied,
     Function onAccept,
   }) async {
     await _requestPermission(
-      permission: permission,
+      appPermission: appPermission,
       onDenied: onDenied,
       onAccept: onAccept,
       onDecline: onDecline,
@@ -23,12 +23,27 @@ class PermissionService {
   }
 
   _requestPermission({
-    @required Permission permission,
+    @required AppPermission appPermission,
     Function onDecline,
     Function onDenied,
     Function onAccept,
   }) async {
-    PermissionStatus permissionStatus = await permission.request();
+    PermissionStatus permissionStatus;
+    switch (appPermission) {
+      case AppPermission.CAMERA:
+        permissionStatus = await Permission.camera.request();
+        break;
+      case AppPermission.GALLERY:
+        permissionStatus = Platform.isIOS
+            ? await Permission.photos.request()
+            : await Permission.storage.request();
+        break;
+      case AppPermission.LOCATION:
+        permissionStatus = await Permission.location.request();
+        break;
+      default:
+        return null;
+    }
     switch (permissionStatus) {
       case PermissionStatus.granted:
         if (onAccept != null) {
@@ -61,9 +76,24 @@ class PermissionService {
   }
 
   Future<bool> isPermissionAlreadyGranted({
-    @required Permission permission,
+    @required AppPermission appPermission,
   }) async {
-    PermissionStatus permissionStatus = await permission.status;
+    PermissionStatus permissionStatus;
+    switch (appPermission) {
+      case AppPermission.CAMERA:
+        permissionStatus = await Permission.camera.request();
+        break;
+      case AppPermission.GALLERY:
+        permissionStatus = Platform.isIOS
+            ? await Permission.photos.request()
+            : await Permission.storage.request();
+        break;
+      case AppPermission.LOCATION:
+        permissionStatus = await Permission.location.request();
+        break;
+      default:
+        return false;
+    }
     switch (permissionStatus) {
       case PermissionStatus.granted:
         return true;
@@ -81,4 +111,10 @@ class PermissionService {
         return false;
     }
   }
+}
+
+enum AppPermission {
+  CAMERA,
+  GALLERY,
+  LOCATION,
 }

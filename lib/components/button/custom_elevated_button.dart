@@ -45,36 +45,32 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        buttonTheme: _getButtonTheme(context),
-      ),
-      child: Wrap(
-        children: [
-          Align(
-            alignment: _getAlignment(),
-            child: ElevatedButton(
-              onPressed: onButtonPress,
-              child: Text(
-                title,
+    return Wrap(
+      children: [
+        Align(
+          alignment: _getAlignment(),
+          child: ElevatedButton(
+            onPressed: onButtonPress,
+            child: Text(
+              title,
+            ),
+            style: ElevatedButton.styleFrom(
+              minimumSize: _getMinimumSize(context),
+              textStyle: _getTextStyle(context),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(cornerRadius),
               ),
-              style: ElevatedButton.styleFrom(
-                textStyle: _getTextStyle(context),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(cornerRadius),
-                ),
-                primary: backgroundColor,
-                padding: _getPadding(),
-              ),
+              primary: backgroundColor,
+              padding: _getPadding(),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  /// This method will update the buttonTheme with custom height and width
-  ButtonThemeData _getButtonTheme(BuildContext context) {
+  /// This method will return size of button
+  Size _getMinimumSize(BuildContext context) {
     ButtonThemeData buttonThemeData = Theme.of(context).buttonTheme;
 
     if (height != null) {
@@ -85,7 +81,10 @@ class CustomElevatedButton extends StatelessWidget {
       buttonThemeData = buttonThemeData.copyWith(minWidth: minWidth);
     }
 
-    return buttonThemeData;
+    return Size(
+      buttonThemeData.minWidth,
+      buttonThemeData.height,
+    );
   }
 
   /// This method will decide textTheme to be used

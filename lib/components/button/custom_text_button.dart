@@ -37,32 +37,28 @@ class CustomTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        buttonTheme: _getButtonTheme(context),
-      ),
-      child: Wrap(
-        children: [
-          Align(
-            alignment: _getAlignment(),
-            child: TextButton(
-              onPressed: onButtonPress,
-              child: Text(
-                title,
-              ),
-              style: TextButton.styleFrom(
-                textStyle: _getTextStyle(context),
-                padding: _getPadding(),
-              ),
+    return Wrap(
+      children: [
+        Align(
+          alignment: _getAlignment(),
+          child: TextButton(
+            onPressed: onButtonPress,
+            child: Text(
+              title,
+            ),
+            style: TextButton.styleFrom(
+              minimumSize: _getMinimumSize(context),
+              textStyle: _getTextStyle(context),
+              padding: _getPadding(),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  /// This method will update the buttonTheme with custom height and width
-  ButtonThemeData _getButtonTheme(BuildContext context) {
+  /// This method will return size of button
+  Size _getMinimumSize(BuildContext context) {
     ButtonThemeData buttonThemeData = Theme.of(context).buttonTheme;
 
     if (height != null) {
@@ -73,7 +69,10 @@ class CustomTextButton extends StatelessWidget {
       buttonThemeData = buttonThemeData.copyWith(minWidth: minWidth);
     }
 
-    return buttonThemeData;
+    return Size(
+      buttonThemeData.minWidth,
+      buttonThemeData.height,
+    );
   }
 
   /// This method will decide textTheme to be used

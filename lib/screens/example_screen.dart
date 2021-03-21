@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skeleton/base/base_stateful_widget.dart';
 import 'package:skeleton/components/button/custom_elevated_button.dart';
-import 'package:skeleton/service/api_service.dart';
-import 'package:skeleton/service/dialog_service.dart';
+import 'package:skeleton/services/api_service.dart';
+import 'package:skeleton/services/dialog_service.dart';
 
 class ExampleScreen extends BaseStatefulWidget {
   _ExampleScreenState createState() => _ExampleScreenState();

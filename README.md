@@ -2,10 +2,10 @@
 
 This project acts like a skeleton project with all the barely minimum needed plugins
 
-1. Get it -> For singleton service
+1. Get it -> For singleton services
 2. pretty_dio_logger -> For API logs
 3. dio -> For API Call
-4. flutter_secure_storage -> For Local key value pair storage
+4. shared_preferences -> For Local key value pair storage
 5. flash -> For Snackbar
 6. permission_handler -> For Runtime permission
 7. cached_network_image -> For cached imageview
