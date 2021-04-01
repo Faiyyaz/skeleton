@@ -107,14 +107,14 @@ class APIService {
     /// Adding interceptor to add token in the request
     dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options) async {
+        onRequest: (options, handler) async {
           String authToken = await _localStorageService.getValue(
             kAuthToken,
           );
           if (authToken != null) {
             options.headers.addAll({"token": authToken});
           }
-          return options;
+          return handler.next(options);
         },
       ),
     );
@@ -128,7 +128,7 @@ class APIService {
 
   /// Method to create custom error response
   Map<String, dynamic> _handleError(DioError error, Dio dio) {
-    String url = error.request.path;
+    String url = error.requestOptions.path;
     if (kDebugMode) {
       print(url);
     }
@@ -136,7 +136,7 @@ class APIService {
     /// Fake statusCode
     int statusCode = 900;
 
-    if (error.type == DioErrorType.RESPONSE) {
+    if (error.type == DioErrorType.response) {
       statusCode = error.response.statusCode;
 
       if (statusCode == 404) {
@@ -150,22 +150,22 @@ class APIService {
           error.response.data,
         );
       }
-    } else if (error.type == DioErrorType.RECEIVE_TIMEOUT) {
+    } else if (error.type == DioErrorType.receiveTimeout) {
       return _generateError(
         statusCode,
         'Request Timed Out',
       );
-    } else if (error.type == DioErrorType.CONNECT_TIMEOUT) {
+    } else if (error.type == DioErrorType.connectTimeout) {
       return _generateError(
         statusCode,
         'Internet Error',
       );
-    } else if (error.type == DioErrorType.SEND_TIMEOUT) {
+    } else if (error.type == DioErrorType.sendTimeout) {
       return _generateError(
         statusCode,
         'Internet Error',
       );
-    } else if (error.type == DioErrorType.DEFAULT) {
+    } else if (error.type == DioErrorType.other) {
       if (error.error is SocketException) {
         return _generateError(
           statusCode,
