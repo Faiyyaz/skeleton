@@ -26,7 +26,4 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PermissionService(),
   );
-  locator.registerLazySingleton(
-    () => PushNotificationService(),
-  );
 }

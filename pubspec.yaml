@@ -36,16 +36,19 @@ dependencies:
   shared_preferences: ^2.0.5
 
   # API Call
-  dio: ^3.0.10
+  dio: ^4.0.0
 
   # API Logger
   pretty_dio_logger: ^1.1.1
 
   # Snackbar
-  flash: ^1.5.0
+  flash: ^1.5.1
 
   # Permission
   permission_handler: ^6.1.1
+
+  # Cache Image
+  cached_network_image: ^3.0.0
 
   # Firebase push notification
   firebase_messaging: ^9.0.0
@@ -69,8 +72,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  #  assets:
-  #     - images/
+  assets:
+     - images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
