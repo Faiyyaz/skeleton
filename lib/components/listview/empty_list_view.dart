@@ -35,9 +35,9 @@ class CustomListView extends StatelessWidget {
   CustomListView({
     @required this.itemCount,
     @required this.itemBuilder,
-    this.isEmpty,
+    @required this.isEmpty,
+    @required this.shouldShowView,
     this.emptyView,
-    this.shouldShowView = false,
     this.isNestedScroll = false,
     this.separator,
     this.horizontalListHeight,
