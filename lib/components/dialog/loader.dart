@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// These variables are not class dependent i.e. there value will remains the same irrespective of loader class objects
 
 /// State whether loader is showing or not
 bool _isShowing = false;
 
-/// Context of current page and dismissing page
-BuildContext _context, _dismissingContext;
+/// Context of current page
+BuildContext _context;
 
 /// This decide whether the loader can be close if click outside or not
 bool _barrierDismissible = false;
@@ -22,6 +24,9 @@ bool _showBackgroundColor = true;
 /// This is custom loader widget class which can be use to create reusable loader
 
 class Loader {
+  final NavigationService _navigationService =
+      serviceLocator.locator<NavigationService>();
+
   Loader({
     @required BuildContext context,
     bool isDismissible,
@@ -42,7 +47,7 @@ class Loader {
     try {
       if (_isShowing) {
         _isShowing = false;
-        Navigator.of(_dismissingContext).pop();
+        _navigationService.goBack();
         return Future.value(true);
       } else {
         return Future.value(false);
@@ -65,7 +70,6 @@ class Loader {
               Animation<double> secondaryAnimation) {
             final Widget pageChild = Builder(
               builder: (BuildContext context) {
-                _dismissingContext = context;
                 return AnnotatedRegion(
                   value: SystemUiOverlayStyle.light,
                   child: WillPopScope(
