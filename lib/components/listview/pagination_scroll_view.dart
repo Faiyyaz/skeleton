@@ -7,26 +7,19 @@ class CustomPaginationScrollView extends StatelessWidget {
   /// View to be shown inside scrollview
   final Widget child;
 
-  /// Function to start pagination
-  final Function onPagination;
+  /// Controller used to listen scroll
+  final ScrollController scrollController;
 
   CustomPaginationScrollView({
-    @required this.onPagination,
+    @required this.scrollController,
     @required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: (ScrollNotification scrollInfo) {
-        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-          onPagination();
-        }
-        return true;
-      },
-      child: SingleChildScrollView(
-        child: child,
-      ),
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: child,
     );
   }
 }

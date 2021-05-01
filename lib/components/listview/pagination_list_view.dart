@@ -32,17 +32,21 @@ class CustomPaginationListView extends StatelessWidget {
   /// If list is empty or not
   final bool isEmpty;
 
-  /// Function to start pagination
-  final Function onPagination;
+  /// Controller used to listen scroll
+  final ScrollController scrollController;
 
   /// To check if its paginating
   final bool isPaginating;
 
+  /// To know if its last page
+  final bool isLastPage;
+
   CustomPaginationListView({
     @required this.itemCount,
     @required this.itemBuilder,
-    @required this.onPagination,
+    @required this.scrollController,
     @required this.isEmpty,
+    @required this.isLastPage,
     @required this.shouldShowView,
     this.emptyView,
     this.isNestedScroll = false,
@@ -63,15 +67,7 @@ class CustomPaginationListView extends StatelessWidget {
         );
       }
     } else if (shouldShowView && !isEmpty) {
-      return NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification scrollInfo) {
-          if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-            onPagination();
-          }
-          return true;
-        },
-        child: _getListView(scrollDirection),
-      );
+      return _getListView(scrollDirection);
     } else {
       return Container();
     }
@@ -81,9 +77,12 @@ class CustomPaginationListView extends StatelessWidget {
     if (scrollDirection == ListViewDirection.VERTICAL) {
       if (separator != null) {
         return ListView.separated(
+          controller: scrollController,
           padding: EdgeInsets.zero,
           separatorBuilder: (context, index) => separator,
           shrinkWrap: isNestedScroll,
+          physics:
+              isNestedScroll ? NeverScrollableScrollPhysics() : ScrollPhysics(),
           primary: false,
           itemBuilder: (context, index) {
             if (index == itemCount) {
@@ -96,8 +95,11 @@ class CustomPaginationListView extends StatelessWidget {
         );
       } else {
         return ListView.builder(
+          controller: scrollController,
           padding: EdgeInsets.zero,
           shrinkWrap: isNestedScroll,
+          physics:
+              isNestedScroll ? NeverScrollableScrollPhysics() : ScrollPhysics(),
           primary: false,
           itemBuilder: (context, index) {
             if (index == itemCount) {
@@ -114,6 +116,7 @@ class CustomPaginationListView extends StatelessWidget {
         return Container(
           height: horizontalListHeight,
           child: ListView.separated(
+            controller: scrollController,
             padding: EdgeInsets.zero,
             separatorBuilder: (context, index) => separator,
             scrollDirection: Axis.horizontal,
@@ -131,6 +134,7 @@ class CustomPaginationListView extends StatelessWidget {
         return Container(
           height: horizontalListHeight,
           child: ListView.builder(
+            controller: scrollController,
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -149,9 +153,21 @@ class CustomPaginationListView extends StatelessWidget {
 
   Widget _buildProgressIndicator() {
     return Visibility(
-      visible: isPaginating,
-      child: Center(
-        child: CircularProgressIndicator(),
+      visible: !isLastPage,
+      child: Opacity(
+        opacity: isPaginating ? 1.0 : 0.0,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
