@@ -56,6 +56,9 @@ dependencies:
   # Firebase core used for background notification
   firebase_core: ^1.0.1
 
+  # Shimmer
+  shimmer: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

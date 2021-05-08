@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
+import 'package:skeleton/screens/list_example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
 import 'package:skeleton/services/navigation_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
@@ -52,6 +53,12 @@ class MyApp extends StatelessWidget {
         return _buildRoute(
           settings,
           ExampleScreen(),
+        );
+        break;
+      case '/listExample':
+        return _buildRoute(
+          settings,
+          ListExampleScreen(),
         );
         break;
     }
