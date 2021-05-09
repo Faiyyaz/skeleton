@@ -34,11 +34,7 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
 
   @override
   bool onBackPress() {
-    if (_isLoading) {
-      return false;
-    } else {
-      return true;
-    }
+    return true;
   }
 
   @override
