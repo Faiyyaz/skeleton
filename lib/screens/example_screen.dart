@@ -48,7 +48,7 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
 
   _callAPI() async {
     _isLoading = true;
-    setState(() {});
+    checkedMountedAndSetState();
     Map<String, dynamic> data = await apiService.callAPI(
       apiMethod: HttpMethod.GET,
       url: 'https://jsonplaceholder.typicode.com/albums/1',
@@ -57,7 +57,7 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
       _data = data['data'].toString();
       Future.delayed(Duration(seconds: 2), () async {
         _isLoading = false;
-        setState(() {});
+        checkedMountedAndSetState();
         await dialogService.showSnackbar(
           SnackbarType.SUCCESS,
           data['success'].toString(),
@@ -66,7 +66,7 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
     } else {
       _isLoading = false;
       _data = data['data']['message'];
-      setState(() {});
+      checkedMountedAndSetState();
       await dialogService.showSnackbar(
         SnackbarType.ERROR,
         data['data']['message'].toString(),
