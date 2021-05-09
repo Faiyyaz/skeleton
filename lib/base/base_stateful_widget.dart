@@ -53,4 +53,12 @@ mixin BasicPage<Page extends BaseStatefulWidget> on BaseState<Page> {
 
   /// This method will decide whether we want to enable or disable back using the hardware key on android
   bool onBackPress();
+
+  /// Use this method to setState since we call API in async function & if we clear stack & do setState().
+  /// This method just check if the widget is visible or not
+  void checkedMountedAndSetState() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
 }
