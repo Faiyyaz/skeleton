@@ -19,11 +19,14 @@ class LoaderWidget extends StatelessWidget {
         child,
         Visibility(
           visible: isLoading,
-          child: IgnorePointer(
-            child: Container(
-              color: Colors.black.withOpacity(0.7),
-              child: Center(
-                child: CircularProgressIndicator(),
+          child: WillPopScope(
+            onWillPop: () async => !isLoading,
+            child: IgnorePointer(
+              child: Container(
+                color: Colors.black.withOpacity(0.7),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             ),
           ),
