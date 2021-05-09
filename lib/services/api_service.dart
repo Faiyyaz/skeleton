@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:skeleton/services/dialog_service.dart';
 import 'package:skeleton/services/local_storage_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 import 'package:skeleton/utilities/constants.dart';
@@ -15,12 +14,9 @@ class APIService {
   final LocalStorageService _localStorageService =
       serviceLocator.locator<LocalStorageService>();
 
-  final DialogService _dialogService = serviceLocator.locator<DialogService>();
-
   Future<Map<String, dynamic>> callAPI({
     @required HttpMethod apiMethod,
     @required String url,
-    bool shouldHideLoader = true,
     Map<String, dynamic> headers,
     dynamic body,
     String contentType = Headers.jsonContentType,
@@ -44,52 +40,48 @@ class APIService {
       case HttpMethod.GET:
         try {
           Response response = await _dio.get(url);
-          _hideLoader(shouldHideLoader);
+
           return {
             'success': true,
             'data': response.data,
           };
         } on DioError catch (e) {
-          _hideLoader(shouldHideLoader);
           return _handleError(e, _dio);
         }
         break;
       case HttpMethod.POST:
         try {
           Response response = await _dio.post(url, data: body);
-          _hideLoader(shouldHideLoader);
+
           return {
             'success': true,
             'data': response.data,
           };
         } on DioError catch (e) {
-          _hideLoader(shouldHideLoader);
           return _handleError(e, _dio);
         }
         break;
       case HttpMethod.PUT:
         try {
           Response response = await _dio.put(url, data: body);
-          _hideLoader(shouldHideLoader);
+
           return {
             'success': true,
             'data': response.data,
           };
         } on DioError catch (e) {
-          _hideLoader(shouldHideLoader);
           return _handleError(e, _dio);
         }
         break;
       case HttpMethod.DELETE:
         try {
           Response response = await _dio.delete(url, data: body);
-          _hideLoader(shouldHideLoader);
+
           return {
             'success': true,
             'data': response.data,
           };
         } on DioError catch (e) {
-          _hideLoader(shouldHideLoader);
           return _handleError(e, _dio);
         }
         break;
@@ -118,12 +110,6 @@ class APIService {
         },
       ),
     );
-  }
-
-  _hideLoader(bool shouldHideLoader) async {
-    if (shouldHideLoader) {
-      await _dialogService.hideLoader();
-    }
   }
 
   /// Method to create custom error response

@@ -288,7 +288,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.1"
   rxdart:
     dependency: transitive
     description:
@@ -335,6 +335,13 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
@@ -419,7 +426,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.3"
   vector_math:
     dependency: transitive
     description:
@@ -433,7 +440,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   xdg_directories:
     dependency: transitive
     description:

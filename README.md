@@ -12,4 +12,9 @@ This project acts like a skeleton project with all the barely minimum needed plu
 8. firebase_messaging -> For push notification (Please check branch named ```firebase_setup```)
 9. easy_localization -> For Translations (Please check branch named ```translations```)
 
-Note : This project is compatible with flutter 2.0 & up. Also please let me know if any more things required
+Note : 
+
+1. This project is compatible with flutter 2.0 & up. Also please let me know if any more things required.
+2. This project is unsound null safety.
+3. In pagination listview while passing is last page do this check for proper endless loader rendering
+   ```isLastPage : page >= (isPaginating ? totalPages + 1 : totalPages)```
