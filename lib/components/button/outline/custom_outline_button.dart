@@ -10,9 +10,6 @@ class CustomOutlineButton extends StatelessWidget {
   /// Title of button
   final String title;
 
-  /// Background color of button
-  final Color outlineColor;
-
   /// Custom TextStyle of button title if any
   final TextStyle titleTextStyle;
 
@@ -31,10 +28,13 @@ class CustomOutlineButton extends StatelessWidget {
   /// Alignment of the view
   final ViewAlignment viewAlignment;
 
+  /// Background color of button
+  final Color backgroundColor;
+
   CustomOutlineButton({
     @required this.onButtonPress,
     @required this.title,
-    @required this.outlineColor,
+    @required this.backgroundColor,
     this.height,
     this.minWidth,
     this.titleTextStyle,
@@ -60,7 +60,7 @@ class CustomOutlineButton extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(cornerRadius),
               ),
-              primary: outlineColor,
+              primary: backgroundColor,
               padding: _getPadding(),
             ),
           ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
-import 'package:skeleton/screens/list_example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
-import 'package:skeleton/services/navigation_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
+import 'package:skeleton/services/navigation_service.dart';
 
 void main() {
   /// Here we are ensuring that app is initialized
@@ -41,12 +40,6 @@ class MyApp extends StatelessWidget {
         return _buildRoute(
           settings,
           ExampleScreen(),
-        );
-        break;
-      case '/listExample':
-        return _buildRoute(
-          settings,
-          ListExampleScreen(),
         );
         break;
     }

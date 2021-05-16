@@ -10,9 +10,6 @@ class CustomElevatedButton extends StatelessWidget {
   /// Title of button
   final String title;
 
-  /// Background color of button
-  final Color backgroundColor;
-
   /// Custom TextStyle of button title if any
   final TextStyle titleTextStyle;
 
@@ -30,6 +27,9 @@ class CustomElevatedButton extends StatelessWidget {
 
   /// Alignment of the view
   final ViewAlignment viewAlignment;
+
+  /// Background color of button
+  final Color backgroundColor;
 
   CustomElevatedButton({
     @required this.onButtonPress,
