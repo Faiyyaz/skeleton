@@ -46,4 +46,9 @@ class _SplashScreenState extends BaseState<SplashScreen> with BasicPage {
       );
     });
   }
+
+  @override
+  bool shouldShowLoader() {
+    return false;
+  }
 }

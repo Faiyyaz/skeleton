@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:skeleton/services/api_service.dart';
 import 'package:skeleton/services/dialog_service.dart';
 import 'package:skeleton/services/local_storage_service.dart';
+import 'package:skeleton/services/locale_service.dart';
 import 'package:skeleton/services/navigation_service.dart';
 import 'package:skeleton/services/permission_service.dart';
 
@@ -24,5 +25,8 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => PermissionService(),
+  );
+  locator.registerLazySingleton(
+    () => LocaleService(),
   );
 }
