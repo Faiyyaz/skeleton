@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skeleton/components/button/custom_text_button.dart';
+import 'package:skeleton/components/button/text/custom_text_button.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   /// Widget to be shown after loading

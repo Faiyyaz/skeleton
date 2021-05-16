@@ -2,10 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
-import 'package:skeleton/screens/list_example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
-import 'package:skeleton/services/navigation_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
+import 'package:skeleton/services/navigation_service.dart';
 
 /// This method is used to listen notification in background. Here you cannot update any ui since it is outside application context
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -53,12 +52,6 @@ class MyApp extends StatelessWidget {
         return _buildRoute(
           settings,
           ExampleScreen(),
-        );
-        break;
-      case '/listExample':
-        return _buildRoute(
-          settings,
-          ListExampleScreen(),
         );
         break;
     }

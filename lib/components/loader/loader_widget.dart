@@ -5,11 +5,11 @@ class LoaderWidget extends StatelessWidget {
   final Widget child;
 
   /// Boolean to toggle between loaded & loading widget
-  final bool isLoading;
+  final bool showLoader;
 
   LoaderWidget({
     @required this.child,
-    @required this.isLoading,
+    @required this.showLoader,
   });
 
   @override
@@ -18,9 +18,9 @@ class LoaderWidget extends StatelessWidget {
       children: [
         child,
         Visibility(
-          visible: isLoading,
+          visible: showLoader,
           child: WillPopScope(
-            onWillPop: () async => !isLoading,
+            onWillPop: () async => !showLoader,
             child: IgnorePointer(
               child: Container(
                 color: Colors.black.withOpacity(0.7),

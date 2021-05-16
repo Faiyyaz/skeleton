@@ -116,4 +116,9 @@ class _ListExampleScreenState extends BaseState<ListExampleScreen>
       );
     }
   }
+
+  @override
+  bool shouldShowLoader() {
+    return _isLoading;
+  }
 }

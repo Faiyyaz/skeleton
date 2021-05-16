@@ -1,6 +1,6 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
-import 'package:skeleton/components/button/custom_text_button.dart';
+import 'package:skeleton/components/button/text/custom_text_button.dart';
 import 'package:skeleton/components/text/custom_text.dart';
 import 'package:skeleton/components/textstyle/custom_text_style.dart';
 import 'package:skeleton/services/navigation_service.dart';

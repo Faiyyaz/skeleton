@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeleton/base/base_stateful_widget.dart';
-import 'package:skeleton/components/button/custom_elevated_button.dart';
+import 'package:skeleton/components/button/elevated/custom_elevated_button.dart';
 import 'package:skeleton/components/loader/loader_widget.dart';
 import 'package:skeleton/services/api_service.dart';
 import 'package:skeleton/services/dialog_service.dart';
@@ -15,18 +15,15 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
 
   @override
   Widget getBody(BuildContext context, Orientation orientation) {
-    return LoaderWidget(
-      isLoading: _isLoading,
-      child: Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: CustomElevatedButton(
-            onButtonPress: () {
-              _callAPI();
-            },
-            title: _data == null ? 'Fetch Data' : _data,
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: CustomElevatedButton(
+          onButtonPress: () {
+            _callAPI();
+          },
+          title: _data == null ? 'Fetch Data' : _data,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
       ),
     );
@@ -68,5 +65,10 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
         data['data']['message'].toString(),
       );
     }
+  }
+
+  @override
+  bool shouldShowLoader() {
+    return _isLoading;
   }
 }

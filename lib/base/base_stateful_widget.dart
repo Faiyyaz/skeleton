@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:skeleton/components/loader/loader_widget.dart';
 import 'package:skeleton/services/api_service.dart';
 import 'package:skeleton/services/dialog_service.dart';
 import 'package:skeleton/services/local_storage_service.dart';
 import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/push_notification_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// This is custom stateful widget class which will be extended by all stateful widget
@@ -22,6 +24,8 @@ mixin BasicPage<Page extends BaseStatefulWidget> on BaseState<Page> {
       serviceLocator.locator<NavigationService>();
   final LocalStorageService localStorageService =
       serviceLocator.locator<LocalStorageService>();
+  final PushNotificationService pushNotificationService =
+      serviceLocator.locator<PushNotificationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +39,12 @@ mixin BasicPage<Page extends BaseStatefulWidget> on BaseState<Page> {
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
             },
-            child: getBody(
-              context,
-              orientation,
+            child: LoaderWidget(
+              showLoader: shouldShowLoader(),
+              child: getBody(
+                context,
+                orientation,
+              ),
             ),
           );
         },
@@ -53,6 +60,9 @@ mixin BasicPage<Page extends BaseStatefulWidget> on BaseState<Page> {
 
   /// This method will decide whether we want to enable or disable back using the hardware key on android
   bool onBackPress();
+
+  /// This method will decide whether to show loader or not
+  bool shouldShowLoader();
 
   /// Use this method to setState since we call API in async function & if we clear stack & do setState().
   /// This method just check if the widget is visible or not
