@@ -22,6 +22,7 @@ class LoaderWidget extends StatelessWidget {
           child: WillPopScope(
             onWillPop: () async => !showLoader,
             child: IgnorePointer(
+              ignoring: !showLoader,
               child: Container(
                 color: Colors.black.withOpacity(0.7),
                 child: Center(
