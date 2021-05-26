@@ -1,19 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:skeleton/screens/example_screen.dart';
+import 'package:skeleton/screens/list_example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 import 'package:skeleton/services/navigation_service.dart';
 import 'package:eraser/eraser.dart';
 
-/// This method is used to listen notification in background. Here you cannot update any ui since it is outside application context
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  /// Initialization is required only if listening to notification in background
-  await Firebase.initializeApp();
-  print("Handling a background message: ${message.messageId}");
-}
+// /// This method is used to listen notification in background. Here you cannot update any ui since it is outside application context
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   /// Initialization is required only if listening to notification in background
+//   await Firebase.initializeApp();
+//   print("Handling a background message: ${message.messageId}");
+// }
 
 Future<void> main() async {
   /// Here we are ensuring that app is initialized
@@ -26,19 +28,40 @@ Future<void> main() async {
   serviceLocator.setupLocator();
 
   /// Here we are setting firebase notification background listener
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  //await Firebase.initializeApp();
+  //FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  runApp(
-    EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('hi')],
-
-      /// In this path we need to create json files for all locale we are defining
-      path: 'assets/translations',
-      fallbackLocale: Locale('en'),
-      useOnlyLangCode: true,
-      child: MyApp(),
+  /// Making status bar transparent
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
     ),
   );
+
+  /// Setting the values
+  await SystemChrome.setEnabledSystemUIOverlays(
+    SystemUiOverlay.values,
+  );
+
+  /// Locking the orientation to portrait only
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) {
+    runApp(
+      EasyLocalization(
+        supportedLocales: [
+          Locale('en'),
+          Locale('hi'),
+        ],
+
+        /// In this path we need to create json files for all locale we are defining
+        path: 'assets/translations',
+        fallbackLocale: Locale('en'),
+        useOnlyLangCode: true,
+        child: MyApp(),
+      ),
+    );
+  });
 
   /// Clearing tray notifications & remove badge count for iOS on app open
   Eraser.clearAllAppNotifications();
@@ -76,6 +99,11 @@ class MyApp extends StatelessWidget {
         return _buildRoute(
           settings,
           ExampleScreen(),
+        );
+      case '/listExample':
+        return _buildRoute(
+          settings,
+          ListExampleScreen(),
         );
     }
     return null;

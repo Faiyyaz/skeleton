@@ -52,7 +52,7 @@ class DialogService {
                   onButtonPress: () {
                     controller.dismiss();
                   },
-                  title: actionLabel!,
+                  title: actionLabel,
                   titleTextStyle: CustomTextStyle.getTextStyle(
                     textColor: Colors.white,
                     fontSize: 12.0,

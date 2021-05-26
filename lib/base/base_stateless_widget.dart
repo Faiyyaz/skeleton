@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:skeleton/services/api_service.dart';
 import 'package:skeleton/services/dialog_service.dart';
 import 'package:skeleton/services/local_storage_service.dart';
+import 'package:skeleton/services/locale_service.dart';
 import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/push_notification_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// This is custom stateless widget class which will be extended by all stateless widget
@@ -13,6 +15,8 @@ abstract class BaseStatelessWidget extends StatelessWidget {
       serviceLocator.locator<NavigationService>();
   final LocalStorageService localStorageService =
       serviceLocator.locator<LocalStorageService>();
+  final LocaleService localeService = serviceLocator.locator<LocaleService>();
+  //final PushNotificationService pushNotificationService = serviceLocator.locator<PushNotificationService>();
 
   BaseStatelessWidget({Key? key}) : super(key: key);
 

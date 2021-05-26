@@ -54,13 +54,13 @@ dependencies:
   shimmer: ^2.0.0
 
   # Firebase push notification
-  firebase_messaging: ^10.0.0
+  # firebase_messaging: ^10.0.0
 
   # Firebase core used for background notification
-  firebase_core: ^1.2.0
+  # firebase_core: ^1.2.0
 
   # To create local notifications using firebase data
-  flutter_local_notifications: ^6.0.0
+  # flutter_local_notifications: ^6.0.0
 
   # Translations
   easy_localization: ^3.0.0

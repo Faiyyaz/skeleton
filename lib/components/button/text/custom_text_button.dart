@@ -14,7 +14,7 @@ class CustomTextButton extends StatelessWidget {
   final VoidCallback onButtonPress;
 
   /// Title of button
-  final String title;
+  final String? title;
 
   /// textStyle of button title
   final TextStyle? titleTextStyle;
@@ -44,7 +44,7 @@ class CustomTextButton extends StatelessWidget {
           child: TextButton(
             onPressed: onButtonPress,
             child: Text(
-              title,
+              title == null ? '' : title!,
             ),
             style: TextButton.styleFrom(
               minimumSize: _getMinimumSize(context),

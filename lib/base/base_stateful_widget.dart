@@ -3,7 +3,9 @@ import 'package:skeleton/components/loader/loader_widget.dart';
 import 'package:skeleton/services/api_service.dart';
 import 'package:skeleton/services/dialog_service.dart';
 import 'package:skeleton/services/local_storage_service.dart';
+import 'package:skeleton/services/locale_service.dart';
 import 'package:skeleton/services/navigation_service.dart';
+import 'package:skeleton/services/push_notification_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// This is custom stateful widget class which will be extended by all stateful widget
@@ -23,6 +25,8 @@ mixin BasicPage<Page extends BaseStatefulWidget> on BaseState<Page> {
       serviceLocator.locator<NavigationService>();
   final LocalStorageService localStorageService =
       serviceLocator.locator<LocalStorageService>();
+  final LocaleService localeService = serviceLocator.locator<LocaleService>();
+  //final PushNotificationService pushNotificationService = serviceLocator.locator<PushNotificationService>();
 
   @override
   Widget build(BuildContext context) {
