@@ -11,6 +11,9 @@ This project acts like a skeleton project with all the barely minimum needed plu
 7. cached_network_image -> For cached imageview
 8. firebase_messaging -> For push notification (Please check branch named ```firebase_setup```)
 9. easy_localization -> For Translations (Please check branch named ```translations```)
+10. shimmer -> For shimmer effects
+11. firebase_core -> For firebase core library (Please check branch named ```firebase_setup or null_safety```)
+12. eraser -> To clear try notifications (Please check branch named ```null_safety```)
 
 Note : 
 
