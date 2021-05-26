@@ -17,4 +17,5 @@ Note :
 1. This project is compatible with flutter 2.0 & up. Also please let me know if any more things required.
 2. This project is unsound null safety.
 3. In pagination listview while passing is last page do this check for proper endless loader rendering
-   ```isLastPage : page >= (isPaginating ? totalPages + 1 : totalPages)```
+   ```isLastPage : page >= (isPaginating ? totalPages + 1 : totalPages)```.
+4. For sound null safety version, check null_safety branch 
