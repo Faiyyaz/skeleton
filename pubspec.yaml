@@ -62,6 +62,9 @@ dependencies:
   # To create local notifications using firebase data
   flutter_local_notifications: ^6.0.0
 
+  # Translations
+  easy_localization: ^3.0.0
+
   # To clear tray notifications
   eraser:
     git:

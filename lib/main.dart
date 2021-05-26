@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-void main() {
+Future<void> main() async {
   /// Here we are ensuring that app is initialized
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// Here we are ensuring that localization is initialized
+  await EasyLocalization.ensureInitialized();
 
   /// Here we are setting up our services on app startup
   serviceLocator.setupLocator();
@@ -24,7 +28,17 @@ void main() {
   /// Here we are setting firebase notification background listener
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  runApp(MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('hi')],
+
+      /// In this path we need to create json files for all locale we are defining
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+      useOnlyLangCode: true,
+      child: MyApp(),
+    ),
+  );
 
   /// Clearing tray notifications & remove badge count for iOS on app open
   Eraser.clearAllAppNotifications();
@@ -39,6 +53,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Skeleton',
+
+      ///Here we are setting current locale
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
 
       ///Here we are setting our navigationService navigatorKey which is used to perform navigation
       navigatorKey: _navigationService.navigatorKey,
