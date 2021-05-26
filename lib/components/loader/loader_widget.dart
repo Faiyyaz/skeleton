@@ -8,8 +8,8 @@ class LoaderWidget extends StatelessWidget {
   final bool showLoader;
 
   LoaderWidget({
-    @required this.child,
-    @required this.showLoader,
+    required this.child,
+    required this.showLoader,
   });
 
   @override

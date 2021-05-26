@@ -34,14 +34,13 @@ class MyApp extends StatelessWidget {
   }
 
   /// This method is used for named navigation
-  Route _getRoute(RouteSettings settings) {
+  Route? _getRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/example':
         return _buildRoute(
           settings,
           ExampleScreen(),
         );
-        break;
     }
     return null;
   }

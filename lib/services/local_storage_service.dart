@@ -7,13 +7,20 @@ class LocalStorageService {
   /// It takes 1 parameter key
   Future<dynamic> getValue(String key) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    dynamic data = sharedPreferences.get(key);
-    return data;
+    if (sharedPreferences.get(key) != null) {
+      dynamic data = sharedPreferences.get(key);
+      return data;
+    } else {
+      return null;
+    }
   }
 
   /// This method is used to set a value for a particular key
   /// It takes 2 parameter key and value
-  Future<bool> setValue({@required String key, @required dynamic value}) async {
+  Future<bool> setValue({
+    required String key,
+    required dynamic value,
+  }) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (value is int) {
       return await sharedPreferences.setInt(key, value);

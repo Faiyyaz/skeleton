@@ -5,22 +5,22 @@ import 'package:skeleton/components/alignment/view_alignment.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   /// OnClick event of button
-  final Function onButtonPress;
+  final VoidCallback onButtonPress;
 
   /// Title of button
   final String title;
 
   /// Custom TextStyle of button title if any
-  final TextStyle titleTextStyle;
+  final TextStyle? titleTextStyle;
 
   /// Custom height for button if any
-  final double height;
+  final double? height;
 
   /// Custom minWidth for button if any
-  final double minWidth;
+  final double? minWidth;
 
   /// Padding for button if any
-  final EdgeInsets buttonPadding;
+  final EdgeInsets? buttonPadding;
 
   /// Corner Radius for button if any
   final double cornerRadius;
@@ -32,9 +32,9 @@ class CustomElevatedButton extends StatelessWidget {
   final Color backgroundColor;
 
   CustomElevatedButton({
-    @required this.onButtonPress,
-    @required this.title,
-    @required this.backgroundColor,
+    required this.onButtonPress,
+    required this.title,
+    required this.backgroundColor,
     this.height,
     this.minWidth,
     this.titleTextStyle,
@@ -88,7 +88,7 @@ class CustomElevatedButton extends StatelessWidget {
   }
 
   /// This method will decide textTheme to be used
-  TextStyle _getTextStyle(BuildContext context) {
+  TextStyle? _getTextStyle(BuildContext context) {
     if (titleTextStyle == null) {
       return Theme.of(context).textTheme.button;
     } else {
@@ -97,7 +97,7 @@ class CustomElevatedButton extends StatelessWidget {
   }
 
   /// This method will decide padding to be used
-  EdgeInsets _getPadding() {
+  EdgeInsets? _getPadding() {
     if (buttonPadding != null) {
       return EdgeInsets.symmetric(horizontal: 16.0);
     } else {
@@ -109,13 +109,10 @@ class CustomElevatedButton extends StatelessWidget {
     switch (viewAlignment) {
       case ViewAlignment.LEFT:
         return Alignment.bottomLeft;
-        break;
       case ViewAlignment.CENTER:
         return Alignment.bottomCenter;
-        break;
       case ViewAlignment.RIGHT:
         return Alignment.bottomRight;
-        break;
       default:
         return Alignment.bottomCenter;
     }

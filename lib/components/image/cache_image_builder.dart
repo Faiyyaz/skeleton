@@ -26,10 +26,10 @@ class CacheImageBuilder extends StatelessWidget {
       Image.asset('images/placeholder.png').image;
 
   CacheImageBuilder({
-    @required this.url,
-    @required this.height,
-    @required this.width,
-    @required this.getImage,
+    required this.url,
+    required this.height,
+    required this.width,
+    required this.getImage,
     this.boxFit = BoxFit.cover,
   });
 

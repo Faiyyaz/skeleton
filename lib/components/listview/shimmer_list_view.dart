@@ -7,10 +7,10 @@ class ShimmerListView extends StatelessWidget {
   final Function itemBuilder;
 
   ShimmerListView({
-    @required this.itemCount,
-    @required this.itemBuilder,
-    @required this.shimmerItemBuilder,
-    @required this.isLoaded,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.shimmerItemBuilder,
+    required this.isLoaded,
   });
 
   @override

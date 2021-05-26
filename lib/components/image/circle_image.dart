@@ -15,8 +15,8 @@ class CircleImage extends StatelessWidget {
   final ViewAlignment viewAlignment;
 
   CircleImage({
-    @required this.url,
-    @required this.size,
+    required this.url,
+    required this.size,
     this.viewAlignment = ViewAlignment.CENTER,
   });
 
@@ -63,13 +63,10 @@ class CircleImage extends StatelessWidget {
     switch (viewAlignment) {
       case ViewAlignment.LEFT:
         return Alignment.topLeft;
-        break;
       case ViewAlignment.CENTER:
         return Alignment.topCenter;
-        break;
       case ViewAlignment.RIGHT:
         return Alignment.topRight;
-        break;
       default:
         return Alignment.topCenter;
     }

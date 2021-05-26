@@ -19,7 +19,7 @@ class _ListExampleScreenState extends BaseState<ListExampleScreen>
     with BasicPage {
   List<AlbumResponse> _albums = [];
   bool _isLoading = false;
-  String _error;
+  String? _error;
 
   @override
   Widget getBody(BuildContext context, Orientation orientation) {
@@ -84,7 +84,7 @@ class _ListExampleScreenState extends BaseState<ListExampleScreen>
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
       _callAPI();
     });
   }

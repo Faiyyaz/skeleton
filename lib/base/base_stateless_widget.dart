@@ -14,7 +14,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   final LocalStorageService localStorageService =
       serviceLocator.locator<LocalStorageService>();
 
-  BaseStatelessWidget({Key key}) : super(key: key);
+  BaseStatelessWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

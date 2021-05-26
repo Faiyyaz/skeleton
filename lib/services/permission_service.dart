@@ -5,10 +5,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 class PermissionService {
   Future<void> getPermission({
-    @required AppPermission appPermission,
-    Function onDecline,
-    Function onDenied,
-    Function onAccept,
+    required AppPermission appPermission,
+    VoidCallback? onDecline,
+    VoidCallback? onDenied,
+    VoidCallback? onAccept,
   }) async {
     await _requestPermission(
       appPermission: appPermission,
@@ -23,10 +23,10 @@ class PermissionService {
   }
 
   _requestPermission({
-    @required AppPermission appPermission,
-    Function onDecline,
-    Function onDenied,
-    Function onAccept,
+    required AppPermission appPermission,
+    VoidCallback? onDecline,
+    VoidCallback? onDenied,
+    VoidCallback? onAccept,
   }) async {
     PermissionStatus permissionStatus;
     switch (appPermission) {
@@ -76,7 +76,7 @@ class PermissionService {
   }
 
   Future<bool> isPermissionAlreadyGranted({
-    @required AppPermission appPermission,
+    required AppPermission appPermission,
   }) async {
     PermissionStatus permissionStatus;
     switch (appPermission) {
@@ -97,16 +97,12 @@ class PermissionService {
     switch (permissionStatus) {
       case PermissionStatus.granted:
         return true;
-        break;
       case PermissionStatus.denied:
         return false;
-        break;
       case PermissionStatus.restricted:
         return false;
-        break;
       case PermissionStatus.permanentlyDenied:
         return false;
-        break;
       default:
         return false;
     }

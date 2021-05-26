@@ -18,9 +18,9 @@ class AlbumResponse {
     this.title,
   });
 
-  int userId;
-  int id;
-  String title;
+  int? userId;
+  int? id;
+  String? title;
 
   factory AlbumResponse.fromJson(Map<String, dynamic> json) => AlbumResponse(
         userId: json["userId"],

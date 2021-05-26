@@ -5,29 +5,29 @@ import 'package:skeleton/components/alignment/view_alignment.dart';
 
 class CustomTextButton extends StatelessWidget {
   /// Custom height for button if any
-  final double height;
+  final double? height;
 
   /// Custom minWidth for button if any
-  final double minWidth;
+  final double? minWidth;
 
   /// OnClick event of button
-  final Function onButtonPress;
+  final VoidCallback onButtonPress;
 
   /// Title of button
   final String title;
 
   /// textStyle of button title
-  final TextStyle titleTextStyle;
+  final TextStyle? titleTextStyle;
 
   /// Padding for button if any
-  final EdgeInsets buttonPadding;
+  final EdgeInsets? buttonPadding;
 
   /// Alignment of the view
   final ViewAlignment viewAlignment;
 
   CustomTextButton({
-    @required this.onButtonPress,
-    @required this.title,
+    required this.onButtonPress,
+    required this.title,
     this.height,
     this.minWidth,
     this.buttonPadding,
@@ -76,7 +76,7 @@ class CustomTextButton extends StatelessWidget {
   }
 
   /// This method will decide textTheme to be used
-  TextStyle _getTextStyle(BuildContext context) {
+  TextStyle? _getTextStyle(BuildContext context) {
     if (titleTextStyle == null) {
       return Theme.of(context).textTheme.button;
     } else {
@@ -85,7 +85,7 @@ class CustomTextButton extends StatelessWidget {
   }
 
   /// This method will decide padding to be used
-  EdgeInsets _getPadding() {
+  EdgeInsets? _getPadding() {
     if (buttonPadding != null) {
       return EdgeInsets.symmetric(horizontal: 16.0);
     } else {
@@ -97,13 +97,10 @@ class CustomTextButton extends StatelessWidget {
     switch (viewAlignment) {
       case ViewAlignment.LEFT:
         return Alignment.bottomLeft;
-        break;
       case ViewAlignment.CENTER:
         return Alignment.bottomCenter;
-        break;
       case ViewAlignment.RIGHT:
         return Alignment.bottomRight;
-        break;
       default:
         return Alignment.bottomCenter;
     }

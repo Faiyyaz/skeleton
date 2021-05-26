@@ -17,9 +17,9 @@ class CacheImage extends StatelessWidget {
   final BoxFit boxFit;
 
   CacheImage({
-    @required this.url,
-    @required this.height,
-    @required this.width,
+    required this.url,
+    required this.height,
+    required this.width,
     this.boxFit = BoxFit.cover,
   });
 

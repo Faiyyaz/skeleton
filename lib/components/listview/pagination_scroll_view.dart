@@ -11,8 +11,8 @@ class CustomPaginationScrollView extends StatelessWidget {
   final ScrollController scrollController;
 
   CustomPaginationScrollView({
-    @required this.scrollController,
-    @required this.child,
+    required this.scrollController,
+    required this.child,
   });
 
   @override

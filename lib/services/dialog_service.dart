@@ -22,13 +22,13 @@ class DialogService {
   Future<void> showSnackbar(
     SnackbarType snackbarType,
     String message, {
-    String actionLabel,
-    Function onActionClick,
+    String? actionLabel,
+    VoidCallback? onActionClick,
   }) async {
     if (!isShowing) {
       isShowing = true;
       await showFlash(
-        context: _navigationService.navigatorKey.currentContext,
+        context: _navigationService.navigatorKey.currentContext!,
         duration: Duration(seconds: 3),
         builder: (context, controller) {
           return Flash(
@@ -36,9 +36,10 @@ class DialogService {
                 ? Colors.green
                 : Colors.red,
             controller: controller,
-            style: FlashStyle.grounded,
+            behavior: FlashBehavior.fixed,
+            position: FlashPosition.bottom,
             child: FlashBar(
-              message: CustomText(
+              content: CustomText(
                 text: message,
                 textStyle: CustomTextStyle.getTextStyle(
                   textColor: Colors.white,
@@ -51,7 +52,7 @@ class DialogService {
                   onButtonPress: () {
                     controller.dismiss();
                   },
-                  title: actionLabel,
+                  title: actionLabel!,
                   titleTextStyle: CustomTextStyle.getTextStyle(
                     textColor: Colors.white,
                     fontSize: 12.0,

@@ -10,7 +10,7 @@ class ExampleScreen extends BaseStatefulWidget {
 
 class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
   bool _isLoading = false;
-  String _data;
+  String? _data;
 
   @override
   Widget getBody(BuildContext context, Orientation orientation) {
@@ -21,7 +21,7 @@ class _ExampleScreenState extends BaseState<ExampleScreen> with BasicPage {
           onButtonPress: () {
             _callAPI();
           },
-          title: _data == null ? 'Fetch Data' : _data,
+          title: _data == null ? 'Fetch Data' : _data!,
           backgroundColor: Theme.of(context).primaryColor,
         ),
       ),

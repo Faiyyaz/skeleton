@@ -11,13 +11,13 @@ class ShimmerPaginationListView extends StatelessWidget {
   final Function itemBuilder;
 
   ShimmerPaginationListView({
-    @required this.itemCount,
-    @required this.itemBuilder,
-    @required this.scrollController,
-    @required this.isPaginating,
-    @required this.isLoaded,
-    @required this.isLastPage,
-    @required this.shimmerItemBuilder,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.scrollController,
+    required this.isPaginating,
+    required this.isLoaded,
+    required this.isLastPage,
+    required this.shimmerItemBuilder,
     this.isNestedScroll = false,
   });
 

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:skeleton/services/local_storage_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
@@ -15,9 +14,9 @@ class APIService {
       serviceLocator.locator<LocalStorageService>();
 
   Future<Map<String, dynamic>> callAPI({
-    @required HttpMethod apiMethod,
-    @required String url,
-    Map<String, dynamic> headers,
+    required HttpMethod apiMethod,
+    required String url,
+    Map<String, dynamic>? headers,
     dynamic body,
     String contentType = Headers.jsonContentType,
   }) async {
@@ -48,7 +47,6 @@ class APIService {
         } on DioError catch (e) {
           return _handleError(e, _dio);
         }
-        break;
       case HttpMethod.POST:
         try {
           Response response = await _dio.post(url, data: body);
@@ -60,7 +58,6 @@ class APIService {
         } on DioError catch (e) {
           return _handleError(e, _dio);
         }
-        break;
       case HttpMethod.PUT:
         try {
           Response response = await _dio.put(url, data: body);
@@ -72,7 +69,6 @@ class APIService {
         } on DioError catch (e) {
           return _handleError(e, _dio);
         }
-        break;
       case HttpMethod.DELETE:
         try {
           Response response = await _dio.delete(url, data: body);
@@ -84,9 +80,6 @@ class APIService {
         } on DioError catch (e) {
           return _handleError(e, _dio);
         }
-        break;
-      default:
-        return null;
     }
   }
 
@@ -100,7 +93,7 @@ class APIService {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          String authToken = await _localStorageService.getValue(
+          String? authToken = await _localStorageService.getValue(
             kAuthToken,
           );
           if (authToken != null) {
@@ -123,7 +116,7 @@ class APIService {
     int statusCode = 900;
 
     if (error.type == DioErrorType.response) {
-      statusCode = error.response.statusCode;
+      statusCode = error.response!.statusCode!;
 
       if (statusCode == 404) {
         return _generateError(
@@ -133,7 +126,7 @@ class APIService {
       } else {
         return _generateError(
           statusCode,
-          error.response.data,
+          error.response!.data,
         );
       }
     } else if (error.type == DioErrorType.receiveTimeout) {

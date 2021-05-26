@@ -6,7 +6,7 @@ import 'package:skeleton/components/listview/listview_direction.dart';
 
 class CustomPaginationListView extends StatelessWidget {
   /// View to be shown if list is empty
-  final Widget emptyView;
+  final Widget? emptyView;
 
   /// List count
   final int itemCount;
@@ -21,10 +21,10 @@ class CustomPaginationListView extends StatelessWidget {
   final bool isNestedScroll;
 
   /// Separator Widget - This is used when list required separator
-  final Widget separator;
+  final Widget? separator;
 
   /// Height for horizontal list
-  final double horizontalListHeight;
+  final double? horizontalListHeight;
 
   /// scrollDirection of list
   final ListViewDirection scrollDirection;
@@ -42,12 +42,12 @@ class CustomPaginationListView extends StatelessWidget {
   final bool isLastPage;
 
   CustomPaginationListView({
-    @required this.itemCount,
-    @required this.itemBuilder,
-    @required this.scrollController,
-    @required this.isEmpty,
-    @required this.isLastPage,
-    @required this.shouldShowView,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.scrollController,
+    required this.isEmpty,
+    required this.isLastPage,
+    required this.shouldShowView,
     this.emptyView,
     this.isNestedScroll = false,
     this.isPaginating = false,
@@ -60,7 +60,7 @@ class CustomPaginationListView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (shouldShowView && isEmpty) {
       if (emptyView != null) {
-        return emptyView;
+        return emptyView!;
       } else {
         return SizedBox(
           height: 0,
@@ -79,7 +79,7 @@ class CustomPaginationListView extends StatelessWidget {
         return ListView.separated(
           controller: scrollController,
           padding: EdgeInsets.zero,
-          separatorBuilder: (context, index) => separator,
+          separatorBuilder: (context, index) => separator!,
           shrinkWrap: isNestedScroll,
           physics:
               isNestedScroll ? NeverScrollableScrollPhysics() : ScrollPhysics(),
@@ -118,7 +118,7 @@ class CustomPaginationListView extends StatelessWidget {
           child: ListView.separated(
             controller: scrollController,
             padding: EdgeInsets.zero,
-            separatorBuilder: (context, index) => separator,
+            separatorBuilder: (context, index) => separator!,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               if (index == itemCount) {

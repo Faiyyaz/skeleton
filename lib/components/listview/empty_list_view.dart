@@ -6,7 +6,7 @@ import 'package:skeleton/components/listview/listview_direction.dart';
 
 class CustomListView extends StatelessWidget {
   /// View to be shown if list is empty
-  final Widget emptyView;
+  final Widget? emptyView;
 
   /// List count
   final int itemCount;
@@ -21,10 +21,10 @@ class CustomListView extends StatelessWidget {
   final bool isNestedScroll;
 
   /// Separator Widget - This is used when list required separator
-  final Widget separator;
+  final Widget? separator;
 
   /// Height for horizontal list
-  final double horizontalListHeight;
+  final double? horizontalListHeight;
 
   /// scrollDirection of list
   final ListViewDirection scrollDirection;
@@ -33,10 +33,10 @@ class CustomListView extends StatelessWidget {
   final bool isEmpty;
 
   CustomListView({
-    @required this.itemCount,
-    @required this.itemBuilder,
-    @required this.isEmpty,
-    @required this.shouldShowView,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.isEmpty,
+    required this.shouldShowView,
     this.emptyView,
     this.isNestedScroll = false,
     this.separator,
@@ -48,7 +48,7 @@ class CustomListView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (shouldShowView && isEmpty) {
       if (emptyView != null) {
-        return emptyView;
+        return emptyView!;
       } else {
         return SizedBox(
           height: 0,
@@ -66,7 +66,7 @@ class CustomListView extends StatelessWidget {
       if (separator != null) {
         return ListView.separated(
           padding: EdgeInsets.zero,
-          separatorBuilder: (context, index) => separator,
+          separatorBuilder: (context, index) => separator!,
           shrinkWrap: isNestedScroll,
           primary: false,
           itemBuilder: (context, index) {
@@ -91,7 +91,7 @@ class CustomListView extends StatelessWidget {
           height: horizontalListHeight,
           child: ListView.separated(
             padding: EdgeInsets.zero,
-            separatorBuilder: (context, index) => separator,
+            separatorBuilder: (context, index) => separator!,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return itemBuilder(index);

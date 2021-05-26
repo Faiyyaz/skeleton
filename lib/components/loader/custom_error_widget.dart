@@ -6,24 +6,24 @@ class CustomErrorWidget extends StatelessWidget {
   final Widget child;
 
   /// Error String
-  final String error;
+  final String? error;
 
   /// Boolean to toggle between loaded & loading widget
   final bool isLoading;
 
   /// Function to retry API call on button click
-  final Function onRetry;
+  final VoidCallback onRetry;
 
   CustomErrorWidget({
-    @required this.child,
-    @required this.error,
-    @required this.isLoading,
-    @required this.onRetry,
+    required this.child,
+    required this.error,
+    required this.isLoading,
+    required this.onRetry,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (!isLoading && error != null && error.isNotEmpty) {
+    if (!isLoading && (error != null && error!.isNotEmpty)) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +35,7 @@ class CustomErrorWidget extends StatelessWidget {
             height: 16.0,
           ),
           Text(
-            error,
+            error!,
             textAlign: TextAlign.center,
           ),
           CustomTextButton(

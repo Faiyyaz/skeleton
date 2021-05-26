@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
   /// Text to be shown in text widget
-  final String text;
+  final String? text;
 
   /// TextStyle of the text to be shown in text widget
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// Maximum number of lines for text
-  final int maxLines;
+  final int? maxLines;
 
   /// How to show textOverflow
   /// use TextOverflow.ellipsis for ... at the end
@@ -20,8 +20,8 @@ class CustomText extends StatelessWidget {
   final TextAlign alignment;
 
   CustomText({
-    @required this.text,
-    @required this.textStyle,
+    required this.text,
+    required this.textStyle,
     this.maxLines,
     this.textOverflow = TextOverflow.clip,
     this.alignment = TextAlign.left,
@@ -30,7 +30,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text == null ? '' : text,
+      text == null ? '' : text!,
       style: textStyle,
       overflow: textOverflow,
       maxLines: maxLines,

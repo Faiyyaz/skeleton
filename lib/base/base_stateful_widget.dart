@@ -8,7 +8,7 @@ import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 /// This is custom stateful widget class which will be extended by all stateful widget
 abstract class BaseStatefulWidget extends StatefulWidget {
-  BaseStatefulWidget({Key key}) : super(key: key);
+  BaseStatefulWidget({Key? key}) : super(key: key);
 }
 
 /// This is custom stateful widget state class for which we will create mixin.
