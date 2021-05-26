@@ -53,6 +53,20 @@ dependencies:
   # Shimmer
   shimmer: ^2.0.0
 
+  # Firebase push notification
+  firebase_messaging: ^10.0.0
+
+  # Firebase core used for background notification
+  firebase_core: ^1.2.0
+
+  # To create local notifications using firebase data
+  flutter_local_notifications: ^6.0.0
+
+  # To clear tray notifications
+  eraser:
+    git:
+      url: https://github.com/Faiyyaz/eraser.git
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

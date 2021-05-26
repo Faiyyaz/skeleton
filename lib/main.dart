@@ -1,8 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton/screens/example_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 import 'package:skeleton/services/navigation_service.dart';
+import 'package:eraser/eraser.dart';
+
+/// This method is used to listen notification in background. Here you cannot update any ui since it is outside application context
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  /// Initialization is required only if listening to notification in background
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
 
 void main() {
   /// Here we are ensuring that app is initialized
@@ -11,7 +21,14 @@ void main() {
   /// Here we are setting up our services on app startup
   serviceLocator.setupLocator();
 
+  /// Here we are setting firebase notification background listener
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(MyApp());
+
+  /// Clearing tray notifications & remove badge count for iOS on app open
+  Eraser.clearAllAppNotifications();
+  Eraser.resetBadgeCountAndRemoveNotificationsFromCenter();
 }
 
 class MyApp extends StatelessWidget {
