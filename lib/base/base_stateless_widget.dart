@@ -3,11 +3,12 @@ import 'package:skeleton/components/loader/loader_widget.dart';
 import 'package:skeleton/services/dialog_service.dart';
 import 'package:skeleton/services/navigation_service.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
+import 'package:skeleton/utilities/custom_logger.dart';
 
 /// This is custom stateless widget class which will be extended by all stateless widget
 abstract class BaseStatelessWidget extends StatelessWidget {
-  final DialogService dialogService = serviceLocator.locator<DialogService>();
-  final NavigationService navigationService =
+  final DialogService _dialogService = serviceLocator.locator<DialogService>();
+  final NavigationService _navigationService =
       serviceLocator.locator<NavigationService>();
 
   BaseStatelessWidget({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
     required String message,
     Function? onActionClick,
   }) {
-    dialogService.showSnackbar(
+    _dialogService.showSnackbar(
       context,
       snackbarType,
       message,
@@ -65,76 +66,89 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   }
 
   /// Use this method to navigate using navigationService
-  void navigation({
+  void navigate({
     required BuildContext context,
-    required String routeName,
     required NavigationType navigationType,
-    Widget? namelessRoute,
+    Widget? screen,
+    String? routeName,
+    bool isFullScreenDialog = false,
     Map<String, dynamic>? arguments,
   }) {
-    switch (navigationType) {
-      case NavigationType.PUSH_REPLACEMENT:
-        navigationService.pushReplacement(
-          context: context,
-          widget: namelessRoute!,
-        );
-        break;
-      case NavigationType.PUSH:
-        navigationService.push(
-          context: context,
-          widget: namelessRoute!,
-        );
-        break;
-      case NavigationType.PUSH_CLEAR_STACK:
-        navigationService.pushAndClearStack(
-          context: context,
-          widget: namelessRoute!,
-        );
-        break;
-      case NavigationType.PUSH_REPLACEMENT_NAMED:
-        navigationService.pushReplacementNamed(
-          context: context,
-          routeName: routeName,
-          arguments: arguments,
-        );
-        break;
-      case NavigationType.PUSH_NAMED:
-        navigationService.pushNamed(
-          context: context,
-          routeName: routeName,
-          arguments: arguments,
-        );
-        break;
-      case NavigationType.PUSH_CLEAR_STACK_NAMED:
-        navigationService.pushNamedAndClearStack(
-          context: context,
-          routeName: routeName,
-          arguments: arguments,
-        );
-        break;
-      case NavigationType.PUSH_WITHOUT_ANIMATION:
-        navigationService.pushWithoutAnimation(
-          context: context,
-          widget: namelessRoute!,
-        );
-        break;
-      case NavigationType.PUSH_REPLACEMENT_WITHOUT_ANIMATION:
-        navigationService.pushReplacementWithoutAnimation(
-          context: context,
-          widget: namelessRoute!,
-        );
-        break;
-      case NavigationType.GO_BACK:
-        navigationService.goBack(
-          context: context,
-        );
-        break;
-      case NavigationType.GO_BACK_WITH_DATA:
-        navigationService.goBackWithData(
-          context: context,
-          data: arguments,
-        );
-        break;
+    if (screen == null && routeName == null) {
+      CustomLogger.logEvent(
+        loggingType: LoggingType.ERROR,
+        message: 'Route is blank provide at least a screen widget or routeName',
+      );
+    } else {
+      switch (navigationType) {
+        case NavigationType.PUSH_REPLACEMENT:
+          if (screen != null) {
+            _navigationService.pushReplacement(
+              context: context,
+              widget: screen,
+              isFullScreenDialog: isFullScreenDialog,
+            );
+          } else {
+            _navigationService.pushReplacementNamed(
+              context: context,
+              routeName: routeName!,
+              arguments: arguments,
+            );
+          }
+          break;
+        case NavigationType.PUSH:
+          if (screen != null) {
+            _navigationService.push(
+              context: context,
+              widget: screen,
+              isFullScreenDialog: isFullScreenDialog,
+            );
+          } else {
+            _navigationService.pushNamed(
+              context: context,
+              routeName: routeName!,
+              arguments: arguments,
+            );
+          }
+          break;
+        case NavigationType.PUSH_CLEAR_STACK:
+          if (screen != null) {
+            _navigationService.pushAndClearStack(
+              context: context,
+              widget: screen,
+            );
+          } else {
+            _navigationService.pushNamedAndClearStack(
+              context: context,
+              routeName: routeName!,
+              arguments: arguments,
+            );
+          }
+          break;
+        case NavigationType.PUSH_WITHOUT_ANIMATION:
+          _navigationService.pushWithoutAnimation(
+            context: context,
+            widget: screen!,
+          );
+          break;
+        case NavigationType.PUSH_REPLACEMENT_WITHOUT_ANIMATION:
+          _navigationService.pushReplacementWithoutAnimation(
+            context: context,
+            widget: screen!,
+          );
+          break;
+        case NavigationType.GO_BACK:
+          _navigationService.goBack(
+            context: context,
+          );
+          break;
+        case NavigationType.GO_BACK_WITH_DATA:
+          _navigationService.goBackWithData(
+            context: context,
+            data: arguments,
+          );
+          break;
+      }
     }
   }
 }
