@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skeleton/screens/splash_screen.dart';
+import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
 Future<void> main() async {
   /// Here we are ensuring that app is initialized
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// Here we are setting up our services on app startup
+  serviceLocator.setupLocator();
 
   /// Making status bar transparent
   SystemChrome.setSystemUIOverlayStyle(
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      home: SplashScreen(),
       onGenerateRoute: _getRoute,
     );
   }

@@ -53,6 +53,9 @@ dependencies:
   # Shimmer
   shimmer: ^2.0.0
 
+  # Logger
+  logger: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
