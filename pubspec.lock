@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.2"
-  args:
-    dependency: transitive
-    description:
-      name: args
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
   async:
     dependency: transitive
     description:
@@ -85,29 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  easy_localization:
-    dependency: "direct main"
-    description:
-      name: easy_localization
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
-  easy_logger:
-    dependency: transitive
-    description:
-      name: easy_logger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
-  eraser:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: c7d6241d9f36718d4334308ec755f8d91f2d769c
-      url: "https://github.com/Faiyyaz/eraser.git"
-    source: git
-    version: "1.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -155,11 +125,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
-  flutter_localizations:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -198,13 +163,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.17.0"
   js:
     dependency: transitive
     description:

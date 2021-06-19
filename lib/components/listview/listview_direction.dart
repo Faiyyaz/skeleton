@@ -1,4 +1,0 @@
-enum ListViewDirection {
-  VERTICAL,
-  HORIZONTAL,
-}

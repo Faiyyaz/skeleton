@@ -1,1 +1,0 @@
-const kAuthToken = 'token';
