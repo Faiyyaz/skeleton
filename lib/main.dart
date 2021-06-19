@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skeleton/screens/movie_detail_screen.dart';
 import 'package:skeleton/screens/splash_screen.dart';
 import 'package:skeleton/services/service_locator.dart' as serviceLocator;
 
@@ -47,6 +48,15 @@ class MyApp extends StatelessWidget {
 
   /// This method is used for named navigation
   Route? _getRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/detail':
+        return _buildRoute(
+          settings,
+          MovieDetailScreen(
+            map: settings.arguments as Map<String, dynamic>,
+          ),
+        );
+    }
     return null;
   }
 

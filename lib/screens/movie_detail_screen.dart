@@ -1,62 +1,39 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:skeleton/api/trending_response.dart';
 import 'package:skeleton/base/base_stateful_widget.dart';
 import 'package:skeleton/components/text/custom_text.dart';
 import 'package:skeleton/components/textstyle/custom_text_style.dart';
 import 'package:skeleton/services/api_service.dart';
-import 'package:skeleton/services/navigation_service.dart';
 import 'package:skeleton/utilities/api_constants.dart';
 
-class HomeScreen extends BaseStatefulWidget {
-  _HomeScreenState createState() => _HomeScreenState();
+class MovieDetailScreen extends BaseStatefulWidget {
+  final Map<String, dynamic> map;
+
+  MovieDetailScreen({
+    required this.map,
+  });
+
+  _MovieDetailScreenState createState() => _MovieDetailScreenState();
 }
 
-class _HomeScreenState extends BaseState<HomeScreen> with BasicPage {
+class _MovieDetailScreenState extends BaseState<MovieDetailScreen>
+    with BasicPage {
   CancelToken _apiCancelToken = CancelToken();
-  int _page = 1;
-
-  List<Result> _results = [];
 
   @override
   Widget getBody(BuildContext context, Orientation orientation) {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
-          text: 'Home',
+          text: widget.map['title'],
           textStyle: CustomTextStyle.getTextStyle(
             textColor: Colors.white,
             fontSize: 16.0,
           ),
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          Result result = _results[index];
-          return ListTile(
-            onTap: () {
-              navigate(
-                context: context,
-                navigationType: NavigationType.PUSH,
-                routeName: '/detail',
-                arguments: {
-                  'id': result.id,
-                  'title': result.originalTitle,
-                },
-              );
-            },
-            title: CustomText(
-              text: result.originalTitle,
-              textStyle: CustomTextStyle.getTextStyle(
-                textColor: Colors.black,
-                fontSize: 16.0,
-              ),
-            ),
-          );
-        },
-        itemCount: _results.length,
-      ),
+      body: Container(),
     );
   }
 
@@ -74,7 +51,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with BasicPage {
   void initState() {
     super.initState();
     SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
-      _getMovies();
+      _getMovieDetail();
     });
   }
 
@@ -86,21 +63,14 @@ class _HomeScreenState extends BaseState<HomeScreen> with BasicPage {
     );
   }
 
-  _getMovies() async {
+  _getMovieDetail() async {
     Map<String, dynamic> response = await apiService.callAPI(
       apiMethod: HttpMethod.GET,
-      url: kBaseAPI + '/movie/popular' + kAPIKeyParam + '&page=$_page',
+      url: kBaseAPI + '/movie/${widget.map['id']}' + kAPIKeyParam,
       cancelToken: _apiCancelToken,
     );
 
     if (response['success']) {
-      MovieListingResponse movieListingResponse =
-          MovieListingResponse.fromJson(response['data']);
-      if (_page == 1) {
-        _results = [];
-      }
-      _results.addAll(movieListingResponse.results!);
-      checkedMountedAndSetState();
     } else {
       showSnackbar(
         context: context,
